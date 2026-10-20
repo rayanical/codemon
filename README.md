@@ -98,10 +98,21 @@ npm run preview     # Preview the build at http://127.0.0.1:4173
 npm run package     # Build and create artifacts/codemon-1.0.0.tgz
 ```
 
-The archive contains `package/dist/`, the README, and package metadata. Serve the contents of `dist/` from the root of any static HTTP host. There is no application server or database to deploy. The npm package is marked private to prevent accidental registry publication.
+The archive contains `package/dist/`, `package/skills/codemon-challenges/`, the README, and package metadata. Serve the contents of `dist/` from the root of any static HTTP host. There is no application server or database to deploy. The npm package is marked private to prevent accidental registry publication.
 
 > [!NOTE]
 > Monaco and Pyodide load runtime assets from external CDNs, so first load requires internet access. This is a practice playground: client-side hidden tests are an interface convention, not secret grading infrastructure. The browser downloads their expected outputs. Python runs off the UI thread, but a Web Worker is not a security boundary for hostile code. Runs are stopped after ten seconds.
+
+### Bundled authoring skill
+
+The repository and release archive both include `skills/codemon-challenges/SKILL.md`. From the repository root (or the extracted archive’s `package/` directory), install it for Codex with:
+
+```sh
+mkdir -p ~/.codex/skills
+cp -R skills/codemon-challenges ~/.codex/skills/
+```
+
+Use the skill from a source checkout when authoring questions: it reads the app’s types and validator to keep generated exercises compatible. Personal exercises belong in gitignored `local/challenges/`.
 
 ## Development
 
