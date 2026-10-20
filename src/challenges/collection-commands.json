@@ -1,0 +1,192 @@
+{
+  "id": "collection-commands",
+  "title": "Collection Commands",
+  "difficulty": "Medium",
+  "topics": ["State", "Simulation"],
+  "functionName": "process_commands",
+  "description": "Implement:\n\n```python\nprocess_commands(commands: list[list[str]]) -> list[str]\n```\n\nMaintain an ordered collection of unique string IDs. Process `commands` in arrival order and return the remaining IDs in collection order. Each part adds an operation; earlier operations continue to work. All four descriptions are available for planning.",
+  "constraints": [
+    "0 <= len(commands) <= 1000",
+    "IDs are nonempty strings. All commands have valid arguments."
+  ],
+  "starterCode": "def process_commands(commands: list[list[str]]) -> list[str]:\n    pass\n",
+  "stages": [
+    {
+      "title": "Add",
+      "description": "Support `add`:\n\n```text\n[\"add\", id]\n```\n\nAppend `id` to the collection if it is absent. Adding an existing ID leaves its position unchanged. An empty input returns an empty list."
+    },
+    {
+      "title": "Remove",
+      "description": "Support `remove`:\n\n```text\n[\"remove\", id]\n```\n\nRemove `id` if present. Missing IDs are ignored. Adding a removed ID appends it to the end."
+    },
+    {
+      "title": "Move",
+      "description": "Support `move`:\n\n```text\n[\"move\", id]\n```\n\nMove an existing `id` to the end. Moving a missing ID does nothing."
+    },
+    {
+      "title": "Clear",
+      "description": "Support `clear`:\n\n```text\n[\"clear\"]\n```\n\nRemove all IDs. Further commands operate on the empty collection."
+    }
+  ],
+  "tests": [
+    {
+      "id": "case-1",
+      "name": "Add in order",
+      "args": [
+        [
+          ["add", "a"],
+          ["add", "b"]
+        ]
+      ],
+      "expected": ["a", "b"],
+      "hidden": false,
+      "stage": 1
+    },
+    {
+      "id": "case-2",
+      "name": "Empty collection",
+      "args": [[]],
+      "expected": [],
+      "hidden": false,
+      "stage": 1
+    },
+    {
+      "id": "case-3",
+      "name": "Duplicate additions",
+      "args": [
+        [
+          ["add", "b"],
+          ["add", "a"],
+          ["add", "b"]
+        ]
+      ],
+      "expected": ["b", "a"],
+      "hidden": true,
+      "stage": 1
+    },
+    {
+      "id": "case-4",
+      "name": "Remove an ID",
+      "args": [
+        [
+          ["add", "a"],
+          ["add", "b"],
+          ["remove", "a"]
+        ]
+      ],
+      "expected": ["b"],
+      "hidden": false,
+      "stage": 2
+    },
+    {
+      "id": "case-5",
+      "name": "Add a removed ID",
+      "args": [
+        [
+          ["add", "a"],
+          ["add", "b"],
+          ["remove", "a"],
+          ["add", "a"]
+        ]
+      ],
+      "expected": ["b", "a"],
+      "hidden": false,
+      "stage": 2
+    },
+    {
+      "id": "case-6",
+      "name": "Missing removals",
+      "args": [
+        [
+          ["remove", "x"],
+          ["add", "a"],
+          ["remove", "a"],
+          ["remove", "a"]
+        ]
+      ],
+      "expected": [],
+      "hidden": true,
+      "stage": 2
+    },
+    {
+      "id": "case-7",
+      "name": "Move to end",
+      "args": [
+        [
+          ["add", "a"],
+          ["add", "b"],
+          ["move", "a"]
+        ]
+      ],
+      "expected": ["b", "a"],
+      "hidden": false,
+      "stage": 3
+    },
+    {
+      "id": "case-8",
+      "name": "Move missing ID",
+      "args": [
+        [
+          ["move", "x"],
+          ["add", "a"]
+        ]
+      ],
+      "expected": ["a"],
+      "hidden": false,
+      "stage": 3
+    },
+    {
+      "id": "case-9",
+      "name": "Moves and removal",
+      "args": [
+        [
+          ["add", "a"],
+          ["add", "b"],
+          ["add", "c"],
+          ["move", "a"],
+          ["remove", "c"],
+          ["move", "b"]
+        ]
+      ],
+      "expected": ["a", "b"],
+      "hidden": true,
+      "stage": 3
+    },
+    {
+      "id": "case-10",
+      "name": "Clear collection",
+      "args": [[["add", "a"], ["clear"]]],
+      "expected": [],
+      "hidden": false,
+      "stage": 4
+    },
+    {
+      "id": "case-11",
+      "name": "Add after clearing",
+      "args": [[["add", "a"], ["clear"], ["add", "b"]]],
+      "expected": ["b"],
+      "hidden": false,
+      "stage": 4
+    },
+    {
+      "id": "case-12",
+      "name": "Repeated clear and operations",
+      "args": [
+        [
+          ["clear"],
+          ["add", "a"],
+          ["add", "b"],
+          ["clear"],
+          ["move", "a"],
+          ["remove", "b"],
+          ["add", "a"],
+          ["clear"],
+          ["add", "c"]
+        ]
+      ],
+      "expected": ["c"],
+      "hidden": true,
+      "stage": 4
+    }
+  ]
+}

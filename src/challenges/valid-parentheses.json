@@ -1,0 +1,54 @@
+{
+  "id": "valid-parentheses",
+  "title": "Valid Parentheses",
+  "difficulty": "Easy",
+  "topics": ["Strings", "Stacks"],
+  "functionName": "is_valid",
+  "description": "Given a string `s` containing only the characters (, ), {, }, [ and ], determine whether the input string is valid.\n\nOpen brackets must be closed by the same type of brackets, in the correct order. The empty string is valid.",
+  "constraints": ["0 ≤ len(s) ≤ 10,000", "s contains only bracket characters."],
+  "starterCode": "def is_valid(s):\n    # Return True if the brackets are balanced.\n    pass\n",
+  "tests": [
+    {
+      "id": "pairs",
+      "name": "Separate pairs",
+      "args": ["()[]{}"],
+      "expected": true,
+      "hidden": false
+    },
+    {
+      "id": "nested",
+      "name": "Nested brackets",
+      "args": ["{[]}"],
+      "expected": true,
+      "hidden": false
+    },
+    {
+      "id": "mismatch",
+      "name": "Mismatched brackets",
+      "args": ["(]"],
+      "expected": false,
+      "hidden": false
+    },
+    {
+      "id": "empty",
+      "name": "Empty string",
+      "args": [""],
+      "expected": true,
+      "hidden": true
+    },
+    {
+      "id": "crossed",
+      "name": "Crossed brackets",
+      "args": ["([)]"],
+      "expected": false,
+      "hidden": true
+    },
+    {
+      "id": "open",
+      "name": "Unclosed bracket",
+      "args": ["["],
+      "expected": false,
+      "hidden": true
+    }
+  ]
+}

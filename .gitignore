@@ -1,0 +1,17 @@
+node_modules/
+dist/
+artifacts/
+*.tgz
+*.tsbuildinfo
+.DS_Store
+.env
+.env.*
+!.env.example
+local/
+*backup*.json
+.playwright-mcp/
+output/
+test-results/
+playwright-report/
+coverage/
+*.log

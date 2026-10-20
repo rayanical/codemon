@@ -1,0 +1,45 @@
+{
+  "name": "codemon",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "test": "node --test tests/*.test.mjs",
+    "preview": "vite preview --host 127.0.0.1",
+    "check": "npm run format:check && npm run check:challenges && npm test && npm run build",
+    "check:challenges": "node scripts/check-challenges.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepack": "npm run build",
+    "package": "node scripts/package.mjs",
+    "test:browser": "node scripts/browser-checks.mjs"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "lucide-react": "^0.468.0",
+    "monaco-editor": "^0.52.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-py": "1.11.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "esbuild": "^0.25.12",
+    "playwright": "^1.64.1",
+    "prettier": "^3.9.10",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0"
+  },
+  "description": "A minimal Python coding playground with declarative challenges, browser-based execution, and saved drafts.",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "files": [
+    "dist/"
+  ]
+}
